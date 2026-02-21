@@ -53,3 +53,6 @@ install(
     TARGETS moqcompat
     EXPORT moxygen-exports
 )
+
+# Add tests subdirectory
+add_subdirectory(test)

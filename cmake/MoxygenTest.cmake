@@ -30,6 +30,20 @@ if(BUILD_TESTS)
     set(LIBGMOCK_LIBRARIES GTest::gtest GTest::gmock)
     set(GLOG_LIBRARY "")  # No glog in std-mode
   endif()
+
+  # Fetch doctest for lightweight compat module tests
+  include(FetchContent)
+  FetchContent_Declare(
+    doctest
+    GIT_REPOSITORY https://github.com/doctest/doctest.git
+    GIT_TAG v2.4.12
+    GIT_SHALLOW TRUE
+  )
+  FetchContent_MakeAvailable(doctest)
+
+  # Include doctest's CMake module for test discovery
+  list(APPEND CMAKE_MODULE_PATH ${doctest_SOURCE_DIR}/scripts/cmake)
+  include(doctest)
 endif()
 
 function(moxygen_add_test)
